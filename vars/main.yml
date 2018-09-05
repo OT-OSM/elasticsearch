@@ -1,0 +1,3 @@
+elasticsearch_version: "6"
+cluster_name: es-standalone
+node_name: server-1
