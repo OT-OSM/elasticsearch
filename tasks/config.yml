@@ -8,5 +8,3 @@
       - { name: 'jvm.options.j2', path: '/etc/elasticsearch/jvm.options' }
   notify:
     - restart elasticsearch
-#  become: true
-
