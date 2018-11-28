@@ -25,7 +25,7 @@ Define your type of nodes in host/inventory file based on below format.
 ```
 [es]
 64.627.16.131 ansible_ssh_user=ubuntu
-
+```
 # Example Playbook
 
 ```
