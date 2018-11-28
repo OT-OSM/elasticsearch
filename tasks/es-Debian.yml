@@ -8,28 +8,24 @@
   stat: path=/etc/init.d/elasticsearch
   register: elasticsearch_installed
 
-# Adding elastic repo
-- apt_repository:
-    repo: "deb https://artifacts.elastic.co/packages/{{ elasticsearch_version }}.x/apt stable main"
-    state: present
-    filename: 'elastic-{{ elasticsearch_version }}.x'
-  when: elasticsearch_installed.stat.exists == false
-
 # updating apt-cache
 - name: Update apt cache if repository just added.
   apt: update_cache=yes
   when: elasticsearch_installed.stat.exists == false
 
-# Installing elasticsearch
-- name: Install elasticsearch.
-  apt: name=elasticsearch state=present force=yes
+# Download elasticsearch
+- name: Download deb.
+  get_url: url=https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-{{ elasticsearch_version }}.deb dest=/tmp/elasticsearch-{{ elasticsearch_version }}.deb
+
+# Install deb file elasticsearch
+- name: install elasticsearch
+  apt: deb=/tmp/elasticsearch-{{ elasticsearch_version }}.deb 
   notify:
    - restart elasticsearch
 
 # Create heap dump directory
 - name: Create heap dump directory
-#  file: path={{ es_jvm_dump }}/heapdump state=directory
-  shell: "date"
+  file: path={{ es_jvm_dump }} state=directory
 
 # Enable elaticsearch
 - name: Enable elasticsearch
