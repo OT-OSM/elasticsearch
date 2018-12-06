@@ -1,0 +1,32 @@
+---
+# Set vm.swappiness to 1 in /etc/sysctl.conf
+- sysctl:
+    name: vm.swappiness
+    value: "{{ swapness }}"
+    state: present
+
+# Set virtual max area /etc/sysctl.conf
+- sysctl:
+    name: vm.max_map_count
+    value: "{{ vm_max_count }}"
+    state: present
+
+# Download elasticsearch
+- name: Download deb.
+  get_url: url=https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-{{ elasticsearch_version }}.rpm dest=/tmp/elasticsearch-{{ elasticsearch_version }}.rpm
+# Install deb file elasticsearch
+- name: install elasticsearch
+  yum: name=/tmp/elasticsearch-{{ elasticsearch_version }}.rpm state=present
+  notify:
+   - restart elasticsearch
+
+# Create heap dump directory
+- name: Create heap dump directory
+  file: path={{ es_jvm_dump }} state=directory
+
+# Enable elaticsearch
+- name: Enable elasticsearch
+  systemd: name=elasticsearch enabled=yes
+ 
+- name: Starting Elasticsearch service
+  service: name=elasticsearch state=started
