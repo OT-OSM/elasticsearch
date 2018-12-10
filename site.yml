@@ -2,4 +2,4 @@
 - hosts: es
   become: true
   roles:
-    - { role: elasticsearch_standalone }
+    - { role: osm_elasticsearch }
