@@ -1,6 +1,15 @@
 # osm_elasticSearch_Standalone
 This repo controls the Ansible Role for ElasticSearch single node installation.
 
+# Supported OS  
+
+```
+Redhat 7
+Centos 7
+Ubuntu 14/16
+Amazon Linux
+```
+
 # Dependencies
 pyhton  
 Java 1.8 or greater 

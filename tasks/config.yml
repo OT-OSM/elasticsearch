@@ -10,6 +10,9 @@
     - reload systemd
     - restart elasticsearch
 
+- name: enable open file witout restart
+  shell: "ulimit -n 4096"
+
 - name: Create elasticsearch configuration files.
   template:
     src: "{{ item.name }}"
