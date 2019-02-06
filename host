@@ -1,0 +1,2 @@
+[es]
+192.168.33.107 ansible_ssh_user=vagrant
