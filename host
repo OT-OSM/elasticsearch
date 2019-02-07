@@ -1,2 +1,2 @@
 [es]
-192.168.33.107 ansible_ssh_user=vagrant
+64.627.16.131 ansible_ssh_user=ubuntu

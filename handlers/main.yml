@@ -6,4 +6,3 @@
 # reload systemd after modification
 - name: reload systemd
   systemd: daemon_reload=yes
-

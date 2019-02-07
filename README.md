@@ -11,22 +11,26 @@ Amazon Linux
 ```
 
 # Dependencies
+```
 pyhton  
 Java 1.8 or greater 
+```
 
 # Variables/Default for elasticsearch
 change below information and uncomment it based on your requirement in var/main.yml file:
 
 ```
 elasticsearch_version: "6.5.1"
-cluster_name: es-cluster
+cluster_name: es-stanalone
 
 #es_jvm_dump: /var/lib/elasticsearch/heap
 #data_path: /var/lib/elasticsearch
 #log_path: /var/log/elasticsearch
 
-#elasticsearchIP: "0.0.0.0"
+#esIP: "0.0.0.0"
 ```
+Note: By default Elasticsearch will start on IPV4 address.
+
 # Node defination:
 Define your type of nodes in host/inventory file based on below format. 
 
