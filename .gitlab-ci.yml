@@ -6,7 +6,7 @@ stages:
   - ansible-lint
 
 variables:
- image_name: opstree/docker:ansible-lint
+  image_name: opstree/docker:ansible-lint
 
 yaml_lint:
   stage: yaml-lint
