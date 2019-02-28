@@ -12,11 +12,11 @@ yaml_lint:
   stage: yaml-lint
   image: $image_name
   script:
-   - "yamllint site.yml"
+   - yamllint -r /*.yml
 
 ansible_lint:
   stage: ansible-lint
   image: $image_name
   script:
-    - "ansible-lint ."
+    - ansible-lint .
 ...
