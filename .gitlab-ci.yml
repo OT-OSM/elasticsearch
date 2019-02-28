@@ -13,6 +13,7 @@ yaml_lint:
   image: $image_name
   script:
    - yamllint .
+  allow_failure: true
 
 ansible_lint:
   stage: ansible-lint
