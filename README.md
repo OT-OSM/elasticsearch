@@ -21,19 +21,21 @@ Dependencies
 * Java 1.8 or higher
 * python
 
-# Variables/Default for elasticsearch
-change below information and uncomment it based on your requirement in var/main.yml file:
+Role Variables/Defaults
+-----------------------
 
-```
-elasticsearch_version: "6.5.1"
-cluster_name: es-stanalone
+|**Variables**| **Default Values**| **Description**|
+|----------|---------|---------------|
+| elasticsearch_version | "6.5.1" | Elasticsearch version you want to install |
+| cluster_name | es-stanalone | Name of the Elasticsearch cluster | 
+| es_jvm_dump | /var/lib/elasticsearch/heap | Path for jvm dump |
+| data_path | /var/lib/elasticsearch | Place to store Elasticsearch content |
+| log_path | /var/log/elasticsearch | Place to store Elasticsearch log |
+| http_port | 9200 | elasticsearch http port |
+| tcp_port | 9300 | elasticsearch tcp port |
+| nproc_limit | 4096 | It is the limit of number of processes for elasticsearch user |
+| swapness | 1 | It defines how much RAM content will be copied to swap |
 
-#es_jvm_dump: /var/lib/elasticsearch/heap
-#data_path: /var/lib/elasticsearch
-#log_path: /var/log/elasticsearch
-
-#esIP: "0.0.0.0"
-```
 Inventory
 ----------
 An inventory for elasticsearch setup should look like this:-
@@ -54,7 +56,18 @@ Example Playbook
 ```
 * ansible-playbook elastic.yml
 
-# License
+**After successful installation of elasticsearch, you can check whether elasticsearch is responding or not by sending the curl request to configured**
+**port on destination ip**
 
-BSD
 
+Future Proposed Changes
+-----------------------
+
+References
+----------
+- **[software](https://www.elastic.co/)**
+
+Author Information
+------------------
+
+- Sumit Anand
