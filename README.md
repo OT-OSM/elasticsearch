@@ -56,7 +56,7 @@ Example Playbook
 ```
 * ansible-playbook elastic.yml
 
-**After installation of elasticsearch, you can check whether elasticsearch is responding or not by curl request to configured port on elasticsearch ip**
+**You can check whether elasticsearch is responding or not by performing curl request to configured port on elasticsearch ip**
 ![response](./media/checkResponse.png)
 
 
