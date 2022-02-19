@@ -12,7 +12,7 @@
     - reload systemd
     - restart elasticsearch
 
-- name: reload systemd before restarting elasticsearch
+- name: Reload systemd before restarting elasticsearch
   meta: flush_handlers
 
 # update elasticsearch config files
