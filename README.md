@@ -7,7 +7,7 @@ Version History
 
 |**Date**| **Version**| **Description**| **Changed By** |
 |----------|---------|---------------|-----------------|
-|**June '15** | v.1.0 | Initial Draft | Sudipt Sharma |
+|**June '15** | v0.1 | Initial Draft | Sudipt Sharma |
 
 Supported OS
 ------------
@@ -26,7 +26,7 @@ Role Variables/Defaults
 
 |**Variables**| **Default Values**| **Description**|
 |----------|---------|---------------|
-| elasticsearch_version | "6.5.1" | Elasticsearch version you want to install |
+| elasticsearch_version | "6.8.22" | Elasticsearch version you want to install |
 | cluster_name | es-stanalone | Name of the Elasticsearch cluster | 
 | es_jvm_dump | /var/lib/elasticsearch/heap | Path for jvm dump |
 | data_path | /var/lib/elasticsearch | Place to store Elasticsearch content |
