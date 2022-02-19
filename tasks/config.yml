@@ -4,6 +4,7 @@
   template:
     src: "{{ item.name }}"
     dest: "{{ item.path }}"
+    mode: '0644'
   with_items:
     - {name: 'limit.conf.j2', path: '/etc/security/limits.d/{{ es }}.conf'}
     - {name: '{{ es_s }}.j2', path: '/usr/lib/systemd/system/{{ es_s }}'}
@@ -11,13 +12,15 @@
     - reload systemd
     - restart elasticsearch
 
-# reload systemd before restarting elasticsearch
-- meta: flush_handlers
+- name: Reload systemd before restarting elasticsearch
+  meta: flush_handlers
+
 # update elasticsearch config files
 - name: Create elasticsearch configuration files.
   template:
     src: "{{ item.name }}"
     dest: "{{ item.path }}"
+    mode: '0660'
   with_items:
     - {name: '{{ es }}.yml.j2', path: '/etc/elasticsearch/{{ es }}.yml'}
     - {name: 'jvm.options.j2', path: '/etc/elasticsearch/jvm.options'}
