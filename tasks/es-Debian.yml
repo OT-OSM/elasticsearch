@@ -37,7 +37,7 @@
     owner: elasticsearch
     group: elasticsearch
     mode: 0775
-    recurse: yes
+    recurse: "yes"
   with_items:
     - "{{ data_path }}"
     - "{{ es_jvm_dump }}"

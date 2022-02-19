@@ -13,7 +13,7 @@ Supported OS
 ------------
   * Redhat : 7
   * CentOS : 7
-  * Ubuntu : 14/16
+  * Ubuntu : 14/16/18/20
   * Amazon Linux
 
 Dependencies

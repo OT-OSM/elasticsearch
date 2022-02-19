@@ -11,6 +11,8 @@
     - reload systemd
     - restart elasticsearch
 
+# reload systemd before restarting elasticsearch
+- meta: flush_handlers
 # update elasticsearch config files
 - name: Create elasticsearch configuration files.
   template:
