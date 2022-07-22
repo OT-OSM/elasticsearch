@@ -1,5 +1,0 @@
----
-- hosts: es
-  become: true
-  roles:
-    - osm_elasticsearch

@@ -1,24 +1,26 @@
 ---
 galaxy_info:
-    author: sumitopstree
+    author: sumitopstree varghese.palamoottil@opstree.com
     description: Install Elasticsearch in Standalone mode
-    license: "license (BSD, MIT)"
-
-    min_ansible_version: 2.7
-
+    role_name: elasticsearch
+    company: "Opstree Solutions"
+    min_ansible_version: 2.3
+    license: license (GPLv2)
     platforms:
         - name: Ubuntu
           versions:
-              - xenial
-              - precise
-              - trusty
+              - bionic
+              - focal
+              - jammy
         - name: Debian
           versions:
               - jessie
               - wheezy
         - name: EL
           versions:
+              - 8
               - 7
+              - 6
     galaxy_tags:
         - web
         - system
