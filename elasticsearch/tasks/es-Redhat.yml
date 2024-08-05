@@ -31,4 +31,5 @@
     name: elasticsearch
     enabled: yes
     state: started
+    notify: Restart Elasticsearch
 
