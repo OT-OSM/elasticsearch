@@ -14,3 +14,4 @@
     state: started
   become: true
   ignore_errors: True
+  notify: Restart Elasticsearch
