@@ -1,7 +1,9 @@
 ---
 - name: Install prerequisites
   apt:
-    name: "{{ prerequisites }}"
+    name: 
+      - apt-transport-https
+      - software-properties-common
     state: present
 
 - name: Add Elastic GPG key
