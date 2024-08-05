@@ -1,0 +1,33 @@
+---
+- name: Install prerequisites
+  apt:
+    name: "{{ prerequisites }}"
+    state: present
+
+- name: Add Elastic GPG key
+  apt_key:
+    url: "{{ key_url }}"
+    state: present
+
+- name: Add Elastic APT repository for Elasticsearch 
+  apt_repository:
+    repo: "{{ elasticsearch_repository }}"
+    state: present
+
+- name: Install Elasticsearch
+  apt:
+    name: elasticsearch={{ elasticsearch_version }}
+    state: present
+  ignore_errors: True
+
+- name: Reload systemd daemon
+  shell: systemctl daemon-reload
+
+- name: Enable and start Elasticsearch service
+  systemd:
+    name: elasticsearch
+    enabled: yes
+    state: started
+  ignore_errors: True
+  
+

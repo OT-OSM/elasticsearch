@@ -1,0 +1,16 @@
+---
+- name: Copy Elasticsearch configuration template
+  template:
+    src: elasticsearch.yml.j2
+    dest: "{{ elasticsearch_config_path }}"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart Elasticsearch
+
+- name: Reload systemd to apply changes
+  service:
+    name: elasticsearch
+    state: started
+  become: true
+  ignore_errors: True
