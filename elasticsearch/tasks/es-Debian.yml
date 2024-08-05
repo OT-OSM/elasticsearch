@@ -21,9 +21,7 @@
     name: elasticsearch={{ elasticsearch_version }}
     state: present
   ignore_errors: True
-
-- name: Reload systemd daemon
-  shell: systemctl daemon-reload
+  notify: Restart Elasticsearch
 
 - name: Enable and start Elasticsearch service
   systemd:
