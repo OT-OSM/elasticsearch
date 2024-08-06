@@ -5,6 +5,9 @@
       - apt-transport-https
       - software-properties-common
     state: present
+  loop:
+    - java-1.8.0-openjdk
+    - wget
 
 - name: Add Elastic GPG key
   apt_key:
