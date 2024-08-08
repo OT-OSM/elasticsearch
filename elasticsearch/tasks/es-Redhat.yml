@@ -1,0 +1,35 @@
+---
+- name: Ensure prerequisites are installed
+  yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - java-1.8.0-openjdk
+    - wget
+
+- name: Download and install the Elasticsearch public signing key
+  rpm_key:
+    key: "{{ key_url }}"
+    state: present
+
+- name: Add Elasticsearch repository
+  yum_repository:
+    name: elasticsearch
+    description: "Elasticsearch repository"
+    baseurl: "{{ base_url }}"
+    gpgkey: "{{ key_url }}"
+    gpgcheck: yes
+    enabled: yes
+
+- name: Install Elasticsearch
+  yum:
+    name: elasticsearch
+    state: present
+
+- name: Ensure Elasticsearch is enabled and started
+  systemd:
+    name: elasticsearch
+    enabled: yes
+    state: started
+    notify: Restart Elasticsearch
+

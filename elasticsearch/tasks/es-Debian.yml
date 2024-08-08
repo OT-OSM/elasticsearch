@@ -1,0 +1,36 @@
+---
+- name: Install prerequisites
+  apt:
+    name: 
+      - apt-transport-https
+      - software-properties-common
+    state: present
+  loop:
+    - java-1.8.0-openjdk
+    - wget
+
+- name: Add Elastic GPG key
+  apt_key:
+    url: "{{ key_url }}"
+    state: present
+
+- name: Add Elastic APT repository for Elasticsearch 
+  apt_repository:
+    repo: "{{ elasticsearch_repository }}"
+    state: present
+
+- name: Install Elasticsearch
+  apt:
+    name: elasticsearch={{ elasticsearch_version }}
+    state: present
+  ignore_errors: True
+  notify: Restart Elasticsearch
+
+- name: Enable and start Elasticsearch service
+  systemd:
+    name: elasticsearch
+    enabled: yes
+    state: started
+  ignore_errors: True
+  
+
