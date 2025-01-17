@@ -1,6 +1,6 @@
 ---
-major_revision: 7
-elasticsearch_version: 7.17.2
+major_revision: 8
+elasticsearch_version: 8.10.2
 cluster_name: es-standalone
 
 es_jvm_dump: /var/lib/elasticsearch/heap
