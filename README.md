@@ -8,12 +8,13 @@ Version History
 |**Date**| **Version**| **Description**| **Changed By** |
 |----------|---------|---------------|-----------------|
 |**June '15** | v0.1 | Initial Draft | Sudipt Sharma |
+|**July '22** | v0.2 | Updated  | Varghese Kurian |
 
 Supported OS
 ------------
-  * Redhat : 7
+  * Redhat : 7/8
   * CentOS : 7
-  * Ubuntu : 14/16/18/20
+  * Ubuntu : 14/16/18/20/22
   * Amazon Linux
 
 Dependencies
@@ -26,7 +27,8 @@ Role Variables/Defaults
 
 |**Variables**| **Default Values**| **Description**|
 |----------|---------|---------------|
-| elasticsearch_version | "6.8.22" | Elasticsearch version you want to install |
+| elasticsearch_version | "7.17.2" | Elasticsearch version you want to install |
+| major_revision | "7" | Elasticsearch major revision version you want to install |
 | cluster_name | es-stanalone | Name of the Elasticsearch cluster | 
 | es_jvm_dump | /var/lib/elasticsearch/heap | Path for jvm dump |
 | data_path | /var/lib/elasticsearch | Place to store Elasticsearch content |
@@ -71,3 +73,4 @@ Author Information
 ------------------
 
 - Sumit Anand
+- Varghese Kurian

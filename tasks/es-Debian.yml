@@ -1,25 +1,22 @@
 ---
-- name: Set vm.swappiness
-  sysctl:
-    name: vm.swappiness
-    value: "{{ swapness }}"
-    state: present
-
-- name: Set virtual max area
-  sysctl:
-    name: vm.max_map_count
-    value: "{{ vm_max_count }}"
+# Download elasticsearch key
+- name: Apt signing key
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     state: present
 
 # Install apt-transports package required for Installation of Elasticsearch
 - name: Install apt-transports
-  apt: name=apt-transport-https state=present update_cache=yes
+  apt:
+    name: apt-transport-https
+    state: present
+    update_cache: true
 
-# Download elasticsearch
-- name: Download deb.
-  get_url:
-    url: https://artifacts.elastic.co/downloads/{{ esurl }}.deb
-    dest: /tmp/elasticsearch-{{ elasticsearch_version }}.deb
+# Download elasticsearch repository
+- name: Add specified repository into sources list
+  apt_repository:
+    repo: "deb {{ repo_burl }}/{{ major_revision }}.x/apt stable main"
+    state: present
 
 # enable openfile limit without restart
 - name: Enable open file witout restart
@@ -28,7 +25,10 @@
 
 # Install deb file elasticsearch
 - name: Install elasticsearch
-  apt: deb=/tmp/elasticsearch-{{ elasticsearch_version }}.deb
+  apt:
+    name: "elasticsearch={{ elasticsearch_version }}"
+    state: present
+    update_cache: true
 
 # Create directory for es_data and heap_dump storage
 - name: Create data_path directory
@@ -45,6 +45,5 @@
   notify:
     - restart elasticsearch
 
-# Enable elaticsearch
-- name: Enable elasticsearch
-  service: name=elasticsearch enabled=yes
+- name: Reload systemd before restarting elasticsearch
+  meta: flush_handlers

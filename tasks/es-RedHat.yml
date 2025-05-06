@@ -1,36 +1,31 @@
 ---
-# install libselinux-python on centos7
-- name: Install net-tools
-  yum: name=net-tools
-  when:
-    - "ansible_os_family == 'RedHat'"
-
-- name: Set vm.swappiness
-  sysctl:
-    name: vm.swappiness
-    value: "{{ swapness }}"
+# Download elasticsearch key
+- name: Import a key from a file
+  rpm_key:
     state: present
-
-- name: Set virtual max area
-  sysctl:
-    name: vm.max_map_count
-    value: "{{ vm_max_count }}"
-    state: present
-
-# Download elasticsearch
-- name: Download rpm.
-  get_url:
-    url: https://artifacts.elastic.co/downloads/{{ esurl }}.rpm
-    dest: /tmp/elasticsearch-{{ elasticsearch_version }}.rpm
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
 
 # enable openfile limit without restart
 - name: Enable open file witout restart
   shell: "ulimit -n 4096"
   changed_when: true
 
+# Download elasticsearch repo
+- name: Add multiple repositories into the same file (1/2)
+  yum_repository:
+    name: elasticsearch
+    description: "Elasticsearch repository for {{ major_revision }}.x packages"
+    baseurl: "https://artifacts.elastic.co/packages/{{ major_revision }}.x/yum"
+    gpgcheck: true
+    gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    enabled: false
+
 # Install rpm file elasticsearch
 - name: Install elasticsearch
-  yum: name=/tmp/elasticsearch-{{ elasticsearch_version }}.rpm state=present
+  yum:
+    name: "elasticsearch-{{ elasticsearch_version }}"
+    state: present
+    enablerepo: elasticsearch
   notify:
     - restart elasticsearch
 
@@ -49,6 +44,5 @@
   notify:
     - restart elasticsearch
 
-# Enable elaticsearch
-- name: Enable elasticsearch
-  systemd: name=elasticsearch enabled=yes
+- name: Reload systemd before restarting elasticsearch
+  meta: flush_handlers
